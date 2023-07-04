@@ -19,19 +19,9 @@ const userSchema = new mongoose.Schema({
   otp: {
     type: Number,
   },
-  cart: [{
-    productId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product'
-    },
-    quantity: {
-      type: Number,
-      default: 1
-    }
-  }],
   phone: {
     type: String,
-    // required: true,
+    required: true,
     minlength: 11,
     maxlength: 11
   }
