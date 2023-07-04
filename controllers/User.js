@@ -36,12 +36,32 @@ const signup = async (req, res) => {
           service: "gmail",
           auth: { user: process.env.SMTP_USERNAME, pass: process.env.SMTP_PASSWORD },
         });
+        // const mailOptions = {
+        //   from: '"Takeaway" alihuzaifazahid786@gmail.com',
+        //   to: req?.body?.email,
+        //   subject: 'OTP Verification',
+        //   text: `Here is your OTP ${otp} for verification`,
+        // };
         const mailOptions = {
-          from: '"Takeaway" alihuzaifazahid786@gmail.com',
+          from: '"EasyBuy" alihuzaifazahid786@gmail.com',
           to: req?.body?.email,
           subject: 'OTP Verification',
-          text: `Here is your OTP ${otp} for verification`,
+          html: `
+            <div style="background-color: #f5f5f5; padding: 20px; font-family: Arial, sans-serif;">
+              <h2 style="color: #333333;">OTP Verification</h2>
+              <p style="color: #333333;">Dear User,</p>
+              <p style="color: #333333;">Thank you for choosing EasyBuy!</p>
+              <p style="color: #333333;">To complete your account verification, please enter the following One-Time Password (OTP):</p>
+              <div style="background-color: #ffffff; padding: 10px; border: 1px solid #e0e0e0; border-radius: 5px;">
+                <h3 style="color: #333333; text-align: center; margin: 0;">${otp}</h3>
+              </div>
+              <p style="color: #333333;">If you did not initiate this verification process, please ignore this email.</p>
+              <p style="color: #333333;">Thank you,</p>
+              <p style="color: #333333;">The EasyBuy Team</p>
+            </div>
+          `,
         };
+
         await transporter.sendMail(mailOptions);
         const { _id, email, name } = newUser;
         const token = generateToken({ _id, email, name });
