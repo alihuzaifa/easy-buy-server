@@ -31,7 +31,7 @@ const signup = async (req, res) => {
       const userObj = { email, password: convertPasswordIntoHash, name, token: '', phone };
       let newUser = await User.create(userObj);
       if (newUser) {
-        const otp = Math.floor(100000 + Math.random() * 900000);
+        const otp = Math.floor(1000 + Math.random() * 9000);
         const transporter = nodemailer.createTransport({
           service: "gmail",
           auth: { user: process.env.SMTP_USERNAME, pass: process.env.SMTP_PASSWORD },
@@ -72,7 +72,7 @@ const sendOtp = async (req, res) => {
     if (!email) { return res.status(400).json({ message: "All data is required" }) }
     const checkUser = await User.findOne({ email })
     if (checkUser) {
-      const otp = Math.floor(100000 + Math.random() * 900000);
+      const otp = Math.floor(1000 + Math.random() * 9000);
       const transporter = nodemailer.createTransport({ service: "gmail", auth: { user: process.env.SMTP_USERNAME, pass: process.env.SMTP_PASSWORD } });
       const mailOptions = {
         from: '"EasyBuy" alihuzaifazahid786@gmail.com',
