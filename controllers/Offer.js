@@ -4,8 +4,8 @@ import cloudinary from "cloudinary";
 const AddOffers = async (req, res) => {
     try {
         console.log("Hello")
-        // const file = req?.file;
-        // const fileUri = getDataUri(file);
+        const file = req?.file;
+        const fileUri = getDataUri(file);
         // const myCloud = await cloudinary.v2.uploader.upload(fileUri?.content);
         // const newOffer = {
         //     image: {
@@ -14,7 +14,7 @@ const AddOffers = async (req, res) => {
         //     },
         // };
         // await Offer.create(newOffer);
-        return res.status(200).json({ message: "Offer Added Successfully" });
+        return res.status(200).json({ message: fileUri });
     } catch (error) {
         return res.status(500).json({ message: error?.message });
     }
