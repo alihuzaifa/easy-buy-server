@@ -13,7 +13,6 @@ import cartRoutes from './routes/Cart.js'
 import cloudinary from "cloudinary";
 import cookieParser from "cookie-parser";
 
-
 /* CONFIGURATION */
 dotenv.config();
 const app = express();
