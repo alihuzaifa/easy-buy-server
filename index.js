@@ -11,6 +11,7 @@ import wishRoutes from './routes/Wishlist.js'
 import productRoutes from './routes/Product.js'
 import cartRoutes from './routes/Cart.js'
 import cloudinary from "cloudinary";
+import cookieParser from "cookie-parser";
 
 
 /* CONFIGURATION */
