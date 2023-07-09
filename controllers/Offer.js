@@ -6,7 +6,7 @@ const AddOffers = async (req, res) => {
         console.log("Hello")
         const file = req?.file;
         const fileUri = getDataUri(file);
-        // const myCloud = await cloudinary.v2.uploader.upload(fileUri?.content);
+        const myCloud = await cloudinary.v2.uploader.upload(fileUri?.content);
         // const newOffer = {
         //     image: {
         //         public_id: myCloud?.public_id,
@@ -14,7 +14,7 @@ const AddOffers = async (req, res) => {
         //     },
         // };
         // await Offer.create(newOffer);
-        return res.status(200).json({ message: fileUri });
+        return res.status(200).json({ message: myCloud });
     } catch (error) {
         return res.status(500).json({ message: error?.message });
     }
