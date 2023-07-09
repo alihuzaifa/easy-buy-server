@@ -17,8 +17,8 @@ import cookieParser from "cookie-parser";
 /* CONFIGURATION */
 dotenv.config();
 const app = express();
-const allowedOrigins = ['http://localhost:3000', '*'];
-app.use(cors({ origin: allowedOrigins }));
+// const allowedOrigins = ['http://localhost:3000', '*'];
+app.use(cors());
 // app.use(cors({ origin: "*" }));
 cloudinary.v2.config({
     cloud_name: process.env.cloud_name,
