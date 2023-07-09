@@ -3,18 +3,17 @@ import Offer from "../models/Offer.js";
 import cloudinary from "cloudinary";
 const AddOffers = async (req, res) => {
     try {
-        console.log("Hello")
         const file = req?.file;
         const fileUri = getDataUri(file);
         const myCloud = await cloudinary.v2.uploader.upload(fileUri?.content);
-        // const newOffer = {
-        //     image: {
-        //         public_id: myCloud?.public_id,
-        //         url: myCloud?.url,
-        //     },
-        // };
-        // await Offer.create(newOffer);
-        return res.status(200).json({ message: myCloud });
+        const newOffer = {
+            image: {
+                public_id: myCloud?.public_id,
+                url: myCloud?.url,
+            },
+        };
+        await Offer.create(newOffer);
+        return res.status(200).json({ message: 'Offer added successfully' });
     } catch (error) {
         return res.status(500).json({ message: error?.message });
     }
