@@ -4,7 +4,7 @@ import singleUpload from "../middleware/Multer.js";
 const router = express.Router();
 router.post("/add", singleUpload, addProduct);
 router.delete("/delete", deleteProduct);
-router.put("/updateDish", (req, res, next) => {
+router.put("/update", (req, res, next) => {
     if (req?.body?.isUpload == false) {
         next()
     } else {
