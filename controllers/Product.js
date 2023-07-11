@@ -42,8 +42,8 @@ const updateProduct = async (req, res) => {
     if (req?.body?.isUpload == false) {
         try {
             const { name, description, price, category, _id } = req.body;
-            if ((!name || !category || !description || !price || !discount, !_id)) return res.status(401).json({ message: "Data is missing" });
-            await Product.findByIdAndUpdate(_id, { name, category, description, price, discount }, { new: true }).exec();
+            // if ((!name || !category || !description || !price || !discount, !_id)) return res.status(401).json({ message: "Data is missing" });
+            // await Product.findByIdAndUpdate(_id, { name, category, description, price, discount }, { new: true }).exec();
             return res.status(200).json({ success: true, message: "Product update successfully" });
         } catch (error) {
             return res.status(500).json({ success: false, error: error.message });
