@@ -24,7 +24,7 @@ const addProduct = async (req, res) => {
         return res.status(500).json({ success: false, error: error.message });
     }
 }
-const deleteProduct = async (req,res) => {
+const deleteProduct = async (req, res) => {
     try {
         const { _id } = req?.body;
         const findProduct = await Product.findOne({ _id })
@@ -43,9 +43,8 @@ const updateProduct = async (req, res) => {
         try {
             const { name, description, price, category, _id } = req.body;
             if ((!name || !category || !description || !price || !discount, !_id)) return res.status(401).json({ message: "Data is missing" });
-            await Product.findByIdAndUpdate(_id, { name, category, description, price, discount }, { new: true }
-            ).exec();
-            return res.status(200).json({ message: "Product update successfully" });
+            await Product.findByIdAndUpdate(_id, { name, category, description, price, discount }, { new: true }).exec();
+            return res.status(200).json({ success: true, message: "Product update successfully" });
         } catch (error) {
             return res.status(500).json({ success: false, error: error.message });
         }
@@ -60,11 +59,9 @@ const updateProduct = async (req, res) => {
             const public_id = findDishId?.image?.public_id
             const { result } = await cloudinary.uploader.destroy(public_id)
             if (result == "ok") {
-                await Product.findByIdAndUpdate(_id, {
-                    name, category, description, price, image: { public_id: myCloud?.public_id, url: myCloud?.url },
-                }, { new: true }
-                ).exec();
-                return res.status(200).json({ message: "Product update successfully" });
+                const imageObj = { public_id: myCloud?.public_id, url: myCloud?.url }
+                await Product.findByIdAndUpdate(_id, { name, category, description, price, image: imageObj, }, { new: true }).exec();
+                return res.status(200).json({ success: true, message: "Product update successfully" });
             }
         } catch (error) {
             return res.status(500).json({ success: false, error: error.message });
