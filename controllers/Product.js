@@ -24,7 +24,7 @@ const addProduct = async (req, res) => {
         return res.status(500).json({ success: false, error: error.message });
     }
 }
-const deleteProduct = async () => {
+const deleteProduct = async (req,res) => {
     try {
         const { _id } = req?.body;
         const findProduct = await Product.findOne({ _id })
@@ -32,7 +32,7 @@ const deleteProduct = async () => {
         const { result } = await cloudinary.uploader.destroy(cloudinaryId)
         if (result == "ok") {
             await Product.deleteOne({ _id });
-            return res.status(200).json({ message: "Product Deleted Successfully" });
+            return res.status(200).json({ success: true, message: "Product Deleted Successfully" });
         }
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
