@@ -1,7 +1,7 @@
 import getDataUri from "../middleware/DataUri.js";
 import Product from "../models/Product.js";
 import cloudinary from 'cloudinary'
-const addProduct = async (req,res) => {
+const addProduct = async (req, res) => {
     try {
         const { name, description, price, category } = req.body;
         if (!name || !description || !price || !category) { return res.status(400).json({ message: "All data is required" }) }
@@ -94,6 +94,14 @@ const getProducts = async (req, res) => {
         return res.status(500).json({ success: false, message: error.message });
     }
 };
+const getAllProducts = async (req, res) => {
+    try {
+        const products = await Product.find({});
+        return res.status(200).json({ success: true, data: products });
+    } catch (error) {
+        return res.status(500).json({ success: false, message: error.message });
+    }
+};
 const searchProductsByName = async (req, res) => {
     try {
         const { query } = req.params;
@@ -103,4 +111,4 @@ const searchProductsByName = async (req, res) => {
         return res.status(500).json({ success: false, message: error.message });
     }
 };
-export { addProduct, deleteProduct, updateProduct, getAllCategory, getProducts, searchProductsByName }
+export { addProduct, deleteProduct, updateProduct, getAllCategory, getProducts, searchProductsByName, getAllProducts }
