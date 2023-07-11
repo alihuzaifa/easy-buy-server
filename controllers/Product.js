@@ -1,14 +1,13 @@
 import getDataUri from "../middleware/DataUri.js";
 import Product from "../models/Product.js";
 import cloudinary from 'cloudinary'
-const addProduct = async () => {
+const addProduct = async (req,res) => {
     try {
-
+        const { name, description, price, category } = req.body;
+        if (!name || !description || !price || !category) { return res.status(400).json({ message: "All data is required" }) }
         const file = req?.file;
         const fileUri = getDataUri(file);
         const myCloud = await cloudinary.v2.uploader.upload(fileUri?.content);
-        const { name, description, price, category } = req.body;
-        if (!name || !description || !price || !category) { return res.status(400).json({ message: "All data is required" }) }
         const product = new Product({
             name,
             description,
