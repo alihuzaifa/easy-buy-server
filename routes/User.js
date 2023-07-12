@@ -6,5 +6,5 @@ router.post("/signup", signup);
 router.post("/sendOtp", sendOtp);
 router.post("/checkOtp", checkOtp);
 router.put("/updatePassword", updatePass);
-router.put("/allUser", GetAllUser);
+router.get("/allUser", GetAllUser);
 export default router;
