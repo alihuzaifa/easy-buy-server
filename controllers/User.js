@@ -125,4 +125,14 @@ const updatePass = async (req, res) => {
     } else { return res.status(400).json({ message: "Password is not matching" }) }
   } catch (error) { return res.status(500).json({ message: error?.message }) }
 };
-export { login, signup, sendOtp, checkOtp, updatePass }
+const GetAllUser = async (req, res) => {
+  try {
+    const allUser = await User.find({}).select("-password");
+    if (allUser) {
+      return res.status(200).json({ success: true, data: allUser });
+    }
+  } catch (error) {
+    res.status(500).json({ success: false, message: error?.message });
+  }
+};
+export { login, signup, sendOtp, checkOtp, updatePass, GetAllUser }
