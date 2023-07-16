@@ -16,7 +16,7 @@ const deleteFaq = async (req, res) => {
 }
 const updateFaq = async (req, res) => {
     try {
-        const { _id } = req.body;
+        const { _id, question, answer } = req.body;
         const updatedFAQ = await FAQ.findByIdAndUpdate(_id, { question }, { answer }, { new: true });
         if (!updatedFAQ) {
             return res.status(404).json({ success: false, message: 'FAQ question not found' });
