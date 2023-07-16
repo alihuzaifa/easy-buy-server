@@ -10,6 +10,7 @@ import offerRoutes from './routes/Offer.js'
 import wishRoutes from './routes/Wishlist.js'
 import productRoutes from './routes/Product.js'
 import cartRoutes from './routes/Cart.js'
+import faqRoutes from './routes/Faq.js'
 import cloudinary from "cloudinary";
 import cookieParser from "cookie-parser";
 
@@ -37,6 +38,7 @@ app.use("/offer", offerRoutes);
 app.use("/wish", wishRoutes);
 app.use("/product", productRoutes);
 app.use("/cart", cartRoutes);
+app.use("/faq", faqRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;

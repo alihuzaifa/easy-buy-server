@@ -9,9 +9,19 @@ const addFaq = async (req, res) => {
 }
 const deleteFaq = async (req, res) => {
     try {
-        const { id } = req.body;
-        await FAQ.findByIdAndDelete(id);
+        const { _id } = req.body;
+        await FAQ.findByIdAndDelete(_id);
         return res.json({ success: true, message: 'FAQ deleted successfully' });
-    } catch (error) { return res.status(500).json({ error: 'Failed to delete FAQ' }) }
+    } catch (error) { return res.status(500).json({ success: false, message: 'Failed to delete FAQ' }) }
 }
-export { addFaq, deleteFaq };
+const updateFaq = async (req, res) => {
+    try {
+        const { _id } = req.body;
+        const updatedFAQ = await FAQ.findByIdAndUpdate(_id, { question }, { answer }, { new: true });
+        if (!updatedFAQ) {
+            return res.status(404).json({ success: false, message: 'FAQ question not found' });
+        }
+        return res.json({ success: true, message: 'FAQ Update successfully' });
+    } catch (error) { return res.status(500).json({ success: false, message: 'Failed to update FAQ' }) }
+}
+export { addFaq, deleteFaq, updateFaq };
