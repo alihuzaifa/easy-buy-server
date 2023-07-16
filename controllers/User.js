@@ -20,7 +20,7 @@ const login = async (req, res) => {
   } catch (error) { return res.status(500).json({ message: error?.message }) }
 };
 const signup = async (req, res) => {
-  const { name, email, password, phone } = req?.body;
+  const { name, email, password, phone, isVerified = false } = req?.body;
   try {
     if (!email || !password || !name || !phone) { return res.status(400).json({ message: "All data is required" }) }
     const checkUser = await User.findOne({ email })
@@ -28,7 +28,7 @@ const signup = async (req, res) => {
     else {
       const salt = await bcrypt.genSalt(10);
       const convertPasswordIntoHash = await bcrypt.hash(password, salt);
-      const userObj = { email, password: convertPasswordIntoHash, name, token: '', phone };
+      const userObj = { email, password: convertPasswordIntoHash, name, token: '', phone, isVerified };
       let newUser = await User.create(userObj);
       if (newUser) {
         const otp = Math.floor(1000 + Math.random() * 9000);
