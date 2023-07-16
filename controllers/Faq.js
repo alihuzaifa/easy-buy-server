@@ -24,4 +24,10 @@ const updateFaq = async (req, res) => {
         return res.json({ success: true, message: 'FAQ Update successfully' });
     } catch (error) { return res.status(500).json({ success: false, message: 'Failed to update FAQ' }) }
 }
-export { addFaq, deleteFaq, updateFaq };
+const getAllFaq = async (req, res) => {
+    try {
+        const getFaqs = await FAQ.find({});
+        return res.json({ success: true, data: getFaqs });
+    } catch (error) { return res.status(500).json({ success: false, message: 'Failed to update FAQ' }) }
+}
+export { addFaq, deleteFaq, updateFaq, getAllFaq };
